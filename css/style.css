@@ -1,40 +1,7 @@
-body {
-  background-color: grey;
-  padding: 10px;
-  color: azure;
-  font-size: 40px;
-  text-align: center;
-}
+body { background-color: grey; padding: 10px; color: azure; font-size: 40px; text-align: center; }
 
-button {
-  display: none;
-  padding: 11px 50px;
-  max-width: 100%;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  color: #fff;
-  background-color: #02ac46;
-  border: 2px solid #02ac46;
-  border-radius: 4px;
-  transition: color .3s, background-color .3s;
-  cursor: pointer;
-  outline: 0 !important;
-  text-decoration: none;
-  touch-action: manipulation;
-  user-select: none;
-}
+button { display: none; padding: 11px 50px; max-width: 100%; font-size: 16px; font-weight: 600; text-align: center; white-space: nowrap; vertical-align: middle; color: #fff; background-color: #02ac46; border: 2px solid #02ac46; border-radius: 4px; transition: color .3s, background-color .3s; cursor: pointer; outline: 0 !important; text-decoration: none; -ms-touch-action: manipulation; touch-action: manipulation; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
 
-button:hover, button:active {
-  color: #02ac46;
-  background-color: #fff;
-}
+button:hover, button:active { color: #02ac46; background-color: #fff; }
 
-#beginButton {
-  display: block;
-  margin: 10px auto;
-}
-
-/*# sourceMappingURL=style.css.map */
+#beginButton { display: block; margin: 10px auto; }
