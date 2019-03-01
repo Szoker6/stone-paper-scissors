@@ -31,25 +31,13 @@ function registerListeners() {
         document.getElementById('scissors').style.display = "block";
     });
     stone.addEventListener('click', function() {
-        var computerChoice = getRandomChoice();
-        var playerChoice = 'kamień';
-        showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
-        var win = didYouWon(playerChoice, computerChoice);   
-        var update = updateResult(playerChoice, computerChoice);    
+        choseAnItem('kamień')     
     });
     paper.addEventListener('click', function() {
-        var computerChoice = getRandomChoice();
-        var playerChoice = 'papier';
-        showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
-        var win = didYouWon(playerChoice, computerChoice);  
-        var update = updateResult(playerChoice, computerChoice);  
+        choseAnItem('papier')  
     });
     scissors.addEventListener('click', function() {
-        var computerChoice = getRandomChoice();
-        var playerChoice = 'nożyczki';
-        showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
-        var win = didYouWon(playerChoice, computerChoice);
-        var update = updateResult(playerChoice, computerChoice);    
+        choseAnItem('nożyczki')     
     });
 };
 
@@ -59,21 +47,22 @@ function getRandomChoice() {
         return choices[randomNumber];
 };
 
-function didYouWon(playerChoice, computerChoice) {
+function showResult(playerChoice, computerChoice) {
     if ((playerChoice == 'kamień' && computerChoice == 'nożyczki') || (playerChoice == 'papier' && computerChoice == 'kamień') || (playerChoice == 'nożyczki' && computerChoice == 'papier')) {
-        showWhoWon.innerHTML = 'Wygrana!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';    
+        showWhoWon.innerHTML = 'Wygrana!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';     
     } else if ((playerChoice == 'kamień' && computerChoice == 'kamień') || (playerChoice == 'papier' && computerChoice == 'papier') || (playerChoice == 'nożyczki' && computerChoice == 'nożyczki')) {
-        showWhoWon.innerHTML = 'Remis!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';    
+        showWhoWon.innerHTML = 'Remis!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
     } else {
-        showWhoWon.innerHTML = 'Porażka!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';     
+        showWhoWon.innerHTML = 'Porażka!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';
+           
     }
 };
  
 function updateResult(playerChoice, computerChoice) {
-    if(playerChoice < computerChoice){
+    console.log(playerChoice, computerChoice);
+    if((playerChoice == 'kamień' && computerChoice == 'nożyczki') || (playerChoice == 'papier' && computerChoice == 'kamień') || (playerChoice == 'nożyczki' && computerChoice == 'papier')) {
         var winValue = parseInt(wins.innerHTML) + 1;
         wins.innerHTML = winValue;
-
     } else if (playerChoice === computerChoice) {
         var drawValue = parseInt(draws.innerHTML) + 1;
         draws.innerHTML = drawValue;
@@ -85,4 +74,10 @@ function updateResult(playerChoice, computerChoice) {
         games.innerHTML = gameValue;
 };
 
+function choseAnItem(playerChoice) {
+    var computerChoice = getRandomChoice(); 
+    showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
+    showResult(playerChoice, computerChoice);
+    updateResult(playerChoice, computerChoice);  
+};
 
