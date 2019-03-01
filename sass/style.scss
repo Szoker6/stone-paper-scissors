@@ -4,9 +4,14 @@ body {
     color: azure;
     font-size: 40px;
     text-align: center;
+    position: relative;
 }
 
-
+#showNumberOfRounds {
+    position: absolute;
+    top: 40%;
+    right: 15%;
+}
 
 button {
     display: none;
@@ -42,4 +47,9 @@ button {
     margin: 10px auto;
 }
 
+.gameresults {
+    display: inline-block;
+    letter-spacing: 35px;
+    margin: 9px 35px;
+}
 
