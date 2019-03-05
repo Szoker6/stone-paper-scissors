@@ -43,7 +43,7 @@ button {
 	}
 }
 #beginButton {
-    display: none;
+    display: block;
     margin: 10px auto;
 }
 
@@ -53,3 +53,8 @@ button {
     margin: 9px 35px;
 }
 
+#newGame {
+    position: absolute;
+    top: 105%;
+    left: 45%;
+}
