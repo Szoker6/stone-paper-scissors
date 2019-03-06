@@ -4,7 +4,7 @@ var welcomeMessage = document.getElementById('welcomeMessage');
 var showResults = document.getElementById('showResults');
 var showNumberOfRounds = document.getElementById('showNumberOfRounds');
 var showWhoWon = document.getElementById('showWhoWon');
-var endOfGame = document.getElementById('endOfGame');
+var endOfGameMessage = document.getElementById('endOfGameMessage');
 var beginButton = document.getElementById('beginButton');
 var winner = document.getElementById('wins');
 var remixed = document.getElementById('draws');
@@ -27,7 +27,7 @@ function askHowManyRounds() {
     var numbersOfRounds = prompt('Ile rund?');  
     if (isNaN(numbersOfRounds) || numbersOfRounds <= 0) {
             alert('Podałeś nieprawidłową wartość licznik ustawiony na 5 rund');
-            return numbersOfRounds = '5';       
+            return '5';       
     } else {
             return numbersOfRounds;
     }       
@@ -50,9 +50,9 @@ function registerListeners() {
     scissors.addEventListener('click', function() {
         choseAnItem('nożyczki');          
     });  
-    newGame.addEventListener('click', function() { 
+    newGameButton.addEventListener('click', function() { 
         reset();
-        newGame.style.display = "none";
+        newGameButton.style.display = "none";
     });    
 };
 
@@ -90,19 +90,12 @@ function choseAnItem(playerChoice) {
 
 function endGame(totalRoundsForGame,  game) {
     if (totalRoundsForGame ===  game) {
-        endOfGame.innerHTML = 'Abt rozpoczać od nowa kliknij nowa gra';
+        endOfGameMessage.innerHTML = 'Aby rozpoczać od nowa kliknij nowa gra';
         setButtonsDisplay('none');   
-        newGame.style.display = "block";    
+        newGameButton.style.display = "block";    
     } else {  
-        endOfGame.innerHTML =  ''; 
+        endOfGameMessage.innerHTML =  ''; 
     }
-};
-
-function reset() {   
-    updateView();
-    showWhoWon.innerHTML = showResults.inner = endOfGame.innerHTML ='';  
-    showNumberOfRounds.innerHTML = 'ilość rund: ';
-    beginButton.style.display = "block";     
 };
 
 function setButtonsDisplay(display) {
@@ -113,10 +106,21 @@ function setButtonsDisplay(display) {
 
 function hideStartGameButtons(display) {
     beginButton.style.display = display;   
-    newGame.style.display = display;   
+    newGameButton.style.display = display;   
 };
 
-function updateView() {    
+function reset() {   
+    showWhoWon.innerHTML = showResults.inner = endOfGameMessage.innerHTML ='';  
+    showNumberOfRounds.innerHTML = 'ilość rund: ';
+    beginButton.style.display = "block";
+    updateView();     
+};
+
+function updateView() {
+    wins = 0;
+    loss = 0;
+    game = 0;
+    draws = 0;    
     winner.innerHTML = wins;
     remixed.innerHTML = draws;
     losser.innerHTML = loss;
