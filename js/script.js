@@ -1,61 +1,129 @@
 'use strict';
 
-var output = document.getElementById('output');
+var welcomeMessage = document.getElementById('welcomeMessage');
+var showResults = document.getElementById('showResults');
 var showNumberOfRounds = document.getElementById('showNumberOfRounds');
+var showWhoWon = document.getElementById('showWhoWon');
+var endOfGameMessage = document.getElementById('endOfGameMessage');
+var beginButton = document.getElementById('beginButton');
+var winner = document.getElementById('wins');
+var remixed = document.getElementById('draws');
+var losser = document.getElementById('loss');
+var games = document.getElementById('games');
+var totalRoundsForGame;
+var wins = 0;
+var loss = 0;
+var game = 0;
+var draws = 0;
 
-output.innerHTML = 'Witamy w grze kamień papier nożyce';
+startGame();
 
-function askHowManyRounds() {
-        console.log(1);
-        var numbersOfRounds = prompt('Ile rund?');
-        console.log(2);
-        return numbersOfRounds;
-        console.log(3);
-        
-        console.log(4);
-        
-};
-var numberOfRounds = askHowManyRounds();
-showNumberOfRounds.innerHTML = 'ilość rund: ' + askHowManyRounds();
-
-
-beginButton.addEventListener('click', function() {
-        
-       document.getElementById('stone').style.display = "block";
-       document.getElementById('paper').style.display = "block";
-       document.getElementById('scissors').style.display = "block";
-       askHowManyRounds();
-});     
-
-
-
-
-
-
-function startRounds() {
-    
-}
-
-function showButtons() {
-        
+function startGame() {
+    welcomeMessage.innerHTML = 'Witamy w grze kamień papier nożyce';
+    registerListeners();
 };
 
+function askHowManyRounds() {    
+    var numbersOfRounds = prompt('Ile rund?');  
+    if (isNaN(numbersOfRounds) || numbersOfRounds <= 0) {
+            alert('Podałeś nieprawidłową wartość licznik ustawiony na 5 rund');
+            return '5';       
+    } else {
+            return numbersOfRounds;
+    }       
+};
+   
+function registerListeners() {
+    beginButton.addEventListener('click', function() {
+        hideStartGameButtons('none');
+        var totalRoundsForGameAsString = askHowManyRounds();
+        totalRoundsForGame = Number(totalRoundsForGameAsString);
+        showNumberOfRounds.innerHTML = 'ilość rund: ' + totalRoundsForGame;
+        setButtonsDisplay('block');      
+    });
+    stone.addEventListener('click', function() {
+        choseAnItem('kamień');        
+    });
+    paper.addEventListener('click', function() {
+        choseAnItem('papier');     
+    });
+    scissors.addEventListener('click', function() {
+        choseAnItem('nożyczki');          
+    });  
+    newGameButton.addEventListener('click', function() { 
+        reset();
+        newGameButton.style.display = "none";
+    });    
+};
 
+function getRandomChoice() {
+    var randomNumber = (Math.floor(Math.random()*3));
+    var choices = ['kamień', 'papier', 'nożyczki'];
+    return choices[randomNumber];
+};
 
+function showResult(playerChoice, computerChoice) {
+    if ((playerChoice == 'kamień' && computerChoice == 'nożyczki') || (playerChoice == 'papier' && computerChoice == 'kamień') || (playerChoice == 'nożyczki' && computerChoice == 'papier')) {
+        showWhoWon.innerHTML = 'Wygrana!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';     
+        wins = wins + 1 ;
+        winner.innerHTML = wins;
+    } else if ((playerChoice == 'kamień' && computerChoice == 'kamień') || (playerChoice == 'papier' && computerChoice == 'papier') || (playerChoice == 'nożyczki' && computerChoice == 'nożyczki')) {       
+        showWhoWon.innerHTML = 'Remis!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
+        draws = draws + 1;
+        remixed.innerHTML = draws;
+    } else {      
+        showWhoWon.innerHTML = 'Porażka!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
+        loss = loss + 1;
+        losser.innerHTML = loss;
+    }
+        game = game + 1;
+        games.innerHTML = game;
+        endGame(totalRoundsForGame,  game);  
+};
 
-paper.addEventListener('click', function clickPaper() {	
+function choseAnItem(playerChoice) {
+    var computerChoice = getRandomChoice(); 
+    showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
+    beginButton.style.display = "none";   
+    showResult(playerChoice, computerChoice);  
+};
 
-});
+function endGame(totalRoundsForGame,  game) {
+    if (totalRoundsForGame ===  game) {
+        endOfGameMessage.innerHTML = 'Aby rozpoczać od nowa kliknij nowa gra';
+        setButtonsDisplay('none');   
+        newGameButton.style.display = "block";    
+    } else {  
+        endOfGameMessage.innerHTML =  ''; 
+    }
+};
 
-scissors.addEventListener('click', function clickScissors() {	
+function setButtonsDisplay(display) {
+    document.getElementById('stone').style.display = display;
+    document.getElementById('paper').style.display = display;
+    document.getElementById('scissors').style.display = display;
+};
 
-});
+function hideStartGameButtons(display) {
+    beginButton.style.display = display;   
+    newGameButton.style.display = display;   
+};
 
-function drawKomputer() {
+function reset() {   
+    showWhoWon.innerHTML = showResults.inner = endOfGameMessage.innerHTML ='';  
+    showNumberOfRounds.innerHTML = 'ilość rund: ';
+    beginButton.style.display = "block";
+    updateView();     
+};
 
-}
-
-function didWon() {
-
-}
+function updateView() {
+    wins = 0;
+    loss = 0;
+    game = 0;
+    draws = 0;    
+    winner.innerHTML = wins;
+    remixed.innerHTML = draws;
+    losser.innerHTML = loss;
+    games.innerHTML = game;
+};
 
