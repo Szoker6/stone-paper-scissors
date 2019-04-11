@@ -11,10 +11,12 @@ var remixed = document.getElementById('draws');
 var losser = document.getElementById('loss');
 var games = document.getElementById('games');
 var totalRoundsForGame;
-var wins = 0;
-var loss = 0;
-var game = 0;
-var draws = 0;
+var parms = {
+ wins: 0,
+ loss: 0,
+ game: 0,
+ draws: 0
+}
 
 startGame();
 
@@ -52,7 +54,7 @@ function registerListeners() {
               choseAnItem('kamień')
           } else if (figureButtons == 1) {
             choseAnItem('papier')
-        } else choseAnItem('nożyczki')
+          } else choseAnItem('nożyczki')
         console.log("figura", figureButtons);
     });
     })();
@@ -72,20 +74,20 @@ function getRandomChoice() {
 function showResult(playerChoice, computerChoice) {
     if ((playerChoice == 'kamień' && computerChoice == 'nożyczki') || (playerChoice == 'papier' && computerChoice == 'kamień') || (playerChoice == 'nożyczki' && computerChoice == 'papier')) {
         showWhoWon.innerHTML = 'Wygrana!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';     
-        wins = wins + 1 ;
-        winner.innerHTML = wins;
+        parms.wins = wins + 1 ;
+        winner.innerHTML = parms.wins;
     } else if ((playerChoice == 'kamień' && computerChoice == 'kamień') || (playerChoice == 'papier' && computerChoice == 'papier') || (playerChoice == 'nożyczki' && computerChoice == 'nożyczki')) {       
         showWhoWon.innerHTML = 'Remis!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
-        draws = draws + 1;
-        remixed.innerHTML = draws;
+        parms.draws = parms.draws + 1;
+        remixed.innerHTML = parms.raws;
     } else {      
         showWhoWon.innerHTML = 'Porażka!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
-        loss = loss + 1;
-        losser.innerHTML = loss;
+        parms.loss = parms.loss + 1;
+        losser.innerHTML = parms.loss;
     }
-        game = game + 1;
-        games.innerHTML = game;
-        endGame(totalRoundsForGame,  game);  
+    parms.game = parms.game + 1;
+        games.innerHTML = parms.game;
+        endGame(totalRoundsForGame,  parms.game);  
 };
 
 function choseAnItem(playerChoice) {
@@ -95,7 +97,7 @@ function choseAnItem(playerChoice) {
     showResult(playerChoice, computerChoice);  
 };
 
-function endGame(totalRoundsForGame,  game) {
+function endGame(totalRoundsForGame, game) {
     if (totalRoundsForGame ===  game) {
         endOfGameMessage.innerHTML = 'Aby rozpoczać od nowa kliknij nowa gra';
         setButtonsDisplay('none');   
@@ -124,14 +126,14 @@ function reset() {
 };
 
 function updateView() {
-    wins = 0;
-    loss = 0;
-    game = 0;
-    draws = 0;    
-    winner.innerHTML = wins;
-    remixed.innerHTML = draws;
-    losser.innerHTML = loss;
-    games.innerHTML = game;
+    parms.wins = 0;
+    parms.loss = 0;
+    parms.game = 0;
+    parms.draws = 0;    
+    winner.innerHTML = parms.wins;
+    remixed.innerHTML = parms.draws;
+    losser.innerHTML = parms.loss;
+    games.innerHTML = parms.game;
 };
 
 //  var array = ['papier', 'kamień', 'nożyce']
