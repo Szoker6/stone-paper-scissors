@@ -41,15 +41,22 @@ function registerListeners() {
         showNumberOfRounds.innerHTML = 'ilość rund: ' + totalRoundsForGame;
         setButtonsDisplay('block');      
     });
-    stone.addEventListener('click', function() {
-        choseAnItem('kamień');        
+    
+    var buttons = document.querySelectorAll('button');
+
+    for (var i = 0; i < buttons.length; i++) {
+    (function(){
+        var figureButtons = i;
+        buttons[figureButtons].addEventListener('click', function(){
+          if (figureButtons == 0) {
+              choseAnItem('kamień')
+          } else if (figureButtons == 1) {
+            choseAnItem('papier')
+        } else choseAnItem('nożyczki')
+        console.log("figura", figureButtons);
     });
-    paper.addEventListener('click', function() {
-        choseAnItem('papier');     
-    });
-    scissors.addEventListener('click', function() {
-        choseAnItem('nożyczki');          
-    });  
+    })();
+}
     newGameButton.addEventListener('click', function() { 
         reset();
         newGameButton.style.display = "none";
@@ -127,3 +134,8 @@ function updateView() {
     games.innerHTML = game;
 };
 
+//  var array = ['papier', 'kamień', 'nożyce']
+           // for (var j = 0; j < array.length; j++) {
+              //  choseAnItem('kamień'); 
+         //   }
+           // choseAnItem(playerChoice);
