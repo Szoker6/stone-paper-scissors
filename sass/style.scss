@@ -1,7 +1,7 @@
 body {
     background-color: grey;
     padding: 10px;
-    color: azure;
+    color: black;
     font-size: 40px;
     text-align: center;
     position: relative;
@@ -58,13 +58,12 @@ button {
 
 #newGameButton {
     position: absolute;
-    top: 105%;
-    left: 40%;
-}
-
-.container {
-	max-width: 400px; 
-	margin: 0 auto;
+		position: absolute;
+    /* top: 174%; */
+    bottok: 58%;
+    bottom: 100%;
+    /* left: -48px; */
+    right: 0px;
 }
 
 .overlay {
@@ -75,10 +74,10 @@ button {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.7);
-}
-
-.overlay .show {
-    display: block;
+	
+	&.show {
+		display: block;
+	}
 }
 
 .modal {
@@ -89,8 +88,8 @@ button {
 	top: 50%;
 	left: 50%;
 	transform: translate3d(-50%, -50%, 0);
-}
-	.modal.show {
+
+	&.show {
 		display: block;
 	}
 	
@@ -115,3 +114,4 @@ button {
 		min-height: 30px;
 		padding: 5px 30px;
 	}
+}   
