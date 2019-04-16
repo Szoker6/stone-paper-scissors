@@ -3,30 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <title>JS</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css"> 
-        <script src="js/script.js" async></script>  
+        <link rel="stylesheet" type="text/css" href="css/style.css">        
     </head>
     <body>
         <div id="welcomeMessage"></div>
         <img src="images/startgame.png"  id="beginButton">
-        <img src="images/newgame.png" id="newGameButton">
-        <button id="stone" data-move="stone" class="player-move">Kamień</button><br/>
-        <button id="paper" data-move="paper" class="player-move">Papier</button><br/>
-        <button id="scissors" data-move="scissors" class="player-move">Nożyce</button>
+        
+        <button id="stone" data-move="kamień" class="player-move">Kamień</button><br/>
+        <button id="paper" data-move="papier" class="player-move">Papier</button><br/>
+        <button id="scissors" data-move="nożyczki" class="player-move">Nożyce</button>
         <div id="showResults"></div><br/> 
         <div id="showWhoWon"></div>
         <div id="showNumberOfRounds"></div>
         <div>Wygrana Remis Przegrana Ilość rund</div>
+        <div id="modalResults"><a href="#modal-one" class="show-modal">Wynik</a></div>
         <div class="gameresults" id="wins"></div>
         <div class="gameresults" id="draws"></div>
         <div class="gameresults" id="loss"></div>
         <div class="gameresults" id="games"></div>
-        <div id="endOfGameMessage"></div>       
-        <div class="overlay" id="overlay">
-            <div class="modal" id="myModal">
-              <div class="modal-content"></div>
-            </div>
+        <div id="endOfGameMessage"></div>   
+        <div id="whowon"></div> 
+        <div class="overlay" id="modal-overlay">
+          <div class="modal" id="modal-one">
+            <a href="#" class="close"><img src="images/newgame.png" id="newGameButton"></a>
+              <header>Modal</header>
+              <div class="content">
+                
+              </div>
           </div>
+         
+          </div>
+      </div>
+        <script src="js/script.js"></script>  
+        <script src="js/modal.js"></script>  
     </body>
 </html>
 
