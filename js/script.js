@@ -11,6 +11,7 @@ var winner = document.getElementById('wins');
 var remixed = document.getElementById('draws');
 var losser = document.getElementById('loss');
 var games = document.getElementById('games');
+var dupa = winnerResult.innerHTML;
 
 // modal variables
 var modal = document.getElementById('modal-one');
@@ -87,7 +88,15 @@ function showResult(playerChoice, computerChoice) {
     params.game = params.game + 1;
         games.innerHTML = params.game;
         checkIfEndGame(totalRoundsForGame, params.game);
-        params.progress.push(`${games.innerHTML} ${playerChoice} ${computerChoice} ${winnerResult.innerHTML} ${winnerResult.innerHTML}` + '<br>');
+        if (params.wins > params.loss) {
+            winnerResult.innerHTML = 'WYGRYWASZ';
+        } else if (params.wins < params.loss) {
+            winnerResult.innerHTML = 'PRZEGRYWASZ';
+        } else {
+            winnerResult.innerHTML = 'REMISUJESZ';
+        }
+        params.progress.push(`${games.innerHTML} ${playerChoice} ${computerChoice} ${winnerResult.innerHTML} Win: ${winner.innerHTML} - Loss: ${losser.innerHTML} - Draw: ${remixed.innerHTML}` + '<br>');
+
 };
 
 function choseAnItem(playerChoice) {
@@ -138,14 +147,7 @@ function updateView() {
 };
 
 function displayWinnerInModal() {
-    if (params.wins > params.loss) {
-        winnerResult.innerHTML = 'wygrałes';
-    } else if (params.wins < params.loss) {
-        winnerResult.innerHTML = 'przegrałeś';
-    } else {
-        winnerResult.innerHTML = 'remis';
-    }
-    params.progress.push(`${winnerResult.innerHTML}` + '<br>');
+    
 };
 
 function createModal() {
@@ -155,7 +157,7 @@ function createModal() {
     var resultList = modal.querySelector('.resultList');
     var p = document.createElement('p');
     var li = document.createElement('li');
-    p.innerHTML = `${params.progress} `;
+    p.innerHTML = `${params.progress}`;
     li.innerHTML = `RUNDA | WYBOR GRACZA | WYBOR KOMPUTERA | WYGRANA RUNDA | WYNIK GRY`;
     resultList.appendChild(li)
     content.appendChild(p);
@@ -173,7 +175,7 @@ function showModal() {
     modal.classList.add('show')
 };
 
-function updateGameProgress() {
-    params.progress.push(`${games.innerHTML} ${winnerResult.innerHTML}` + '<br>');
-};
-console.log(updateGameProgress())
+// function updateGameProgress() {
+//     params.progress.push(`${games.innerHTML} ${winnerResult.innerHTML}` + '<br>');
+// };
+// console.log(updateGameProgress())
