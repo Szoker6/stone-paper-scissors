@@ -16,22 +16,21 @@
         <div id="showWhoWon"></div>
         <div id="showNumberOfRounds"></div>
         <div>Wygrana Remis Przegrana Ilość rund</div>
-        <div id="modalResults"><a href="#modal-one" class="show-modal">a</a></div>
         <div class="gameresults" id="wins"></div>
         <div class="gameresults" id="draws"></div>
         <div class="gameresults" id="loss"></div>
         <div class="gameresults" id="games"></div>
         <div id="endOfGameMessage"></div>   
-        <div id="whowon"></div> 
         <div class="overlay" id="modal-overlay">
           <div class="modal" id="modal-one">
             <a href="#" class="close"><img src="images/newgame.png" id="newGameButton"></a>
-              <header>Modal</header>
-              <div class="content"></div>
+              <header><div id="winnerResult"></div> </header>
+              <div class="content">
+                <ul class="resultList"></ul>
+              </div>
           </div>   
       </div>
         <script src="js/script.js"></script>  
-        <script src="js/modal.js"></script>  
     </body>
 </html>
 
