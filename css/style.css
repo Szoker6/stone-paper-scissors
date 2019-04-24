@@ -56,12 +56,10 @@ button:hover, button:active {
 
 #newGameButton {
   position: absolute;
-  position: absolute;
-  /* top: 174%; */
-  bottok: 58%;
   bottom: 100%;
-  /* left: -48px; */
   right: 0px;
+  width: 703px;
+  height: 130px;
 }
 
 .overlay {
@@ -81,7 +79,6 @@ button:hover, button:active {
 .modal {
   display: none;
   background: #fff;
-  width: 200px;
   position: absolute;
   top: 50%;
   left: 50%;

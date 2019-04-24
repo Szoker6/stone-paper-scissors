@@ -15,6 +15,7 @@ var games = document.getElementById('games');
 
 var totalRoundsForGame;
 var params = {
+ progress = [],
  wins: 0,
  loss: 0,
  game: 0,
@@ -106,11 +107,11 @@ function endGame(totalRoundsForGame, game) {
         endOfGameMessage.innerHTML = 'Aby rozpoczać od nowa kliknij nowa gra';
         setButtonsDisplay('none');   
         newGameButton.style.display = "block";   
-        modalResults.style.display = "block";  
-       whoWon();
+        modalResults.style.display = "block";   
     } else {  
         endOfGameMessage.innerHTML =  ''; 
     }  
+    createModal();
 };
 
 function setButtonsDisplay(display) {
@@ -143,3 +144,21 @@ function updateView() {
     losser.innerHTML = params.loss;
     games.innerHTML = params.game;
 };
+
+function whoWon() {
+    if (params.wins > params.loss) {
+        whowon.innerHTML = 'wygrałes'
+    } else if (params.wins < params.loss) {
+        whowon.innerHTML = 'przegrałeś'
+    } else  whowon.innerHTML = 'remis'
+};
+
+function createModal() {
+    modalResults.style.display = "block";
+    var modal = document.getElementById('modal-one');
+    var content = modal.querySelector('.content');
+    var p = document.createElement('p');
+    p.innerHTML = JSON.stringify(params);
+    content.appendChild(p);  
+    
+}
