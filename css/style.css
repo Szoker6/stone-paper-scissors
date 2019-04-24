@@ -43,6 +43,11 @@ button:hover, button:active {
   background-color: #fff;
 }
 
+li {
+  list-style: none;
+  font-size: 20px;
+}
+
 #beginButton {
   display: block;
   margin: 10px auto;
@@ -108,7 +113,12 @@ button:hover, button:active {
 
 .modal .content {
   min-height: 30px;
-  padding: 5px 30px;
+  padding: 5px 0;
+  width: 900px;
+}
+
+.modal .content p {
+  font-size: 18px;
 }
 
 /*# sourceMappingURL=style.css.map */
