@@ -5,19 +5,25 @@ var showResults = document.getElementById('showResults');
 var showNumberOfRounds = document.getElementById('showNumberOfRounds');
 var showWhoWon = document.getElementById('showWhoWon');
 var endOfGameMessage = document.getElementById('endOfGameMessage');
+var whowon = document.getElementById('whowon');
 var beginButton = document.getElementById('beginButton');
+var modalResults = document.getElementById('modalResults');
 var winner = document.getElementById('wins');
 var remixed = document.getElementById('draws');
 var losser = document.getElementById('loss');
 var games = document.getElementById('games');
+
 var totalRoundsForGame;
-var wins = 0;
-var loss = 0;
-var game = 0;
-var draws = 0;
+var params = {
+ progress = [],
+ wins: 0,
+ loss: 0,
+ game: 0,
+ draws: 0
+}
 
 startGame();
-
+modalResults.style.display = "none";
 function startGame() {
     welcomeMessage.innerHTML = 'Witamy w grze kamień papier nożyce';
     registerListeners();
@@ -41,20 +47,21 @@ function registerListeners() {
         showNumberOfRounds.innerHTML = 'ilość rund: ' + totalRoundsForGame;
         setButtonsDisplay('block');      
     });
-    stone.addEventListener('click', function() {
-        choseAnItem('kamień');        
-    });
-    paper.addEventListener('click', function() {
-        choseAnItem('papier');     
-    });
-    scissors.addEventListener('click', function() {
-        choseAnItem('nożyczki');          
-    });  
+    var buttons = document.querySelectorAll('button');
+    for (let i = 0; i < buttons.length; i++) {
+        let currentButton = buttons[i];
+        buttons[i].addEventListener('click', function() {
+            var currentButtonName = currentButton.getAttribute('data-move');
+            choseAnItem(currentButtonName); // kamien, papier, nozyczki
+        });
+    }
+    
+}
     newGameButton.addEventListener('click', function() { 
         reset();
         newGameButton.style.display = "none";
     });    
-};
+
 
 function getRandomChoice() {
     var randomNumber = (Math.floor(Math.random()*3));
@@ -65,22 +72,29 @@ function getRandomChoice() {
 function showResult(playerChoice, computerChoice) {
     if ((playerChoice == 'kamień' && computerChoice == 'nożyczki') || (playerChoice == 'papier' && computerChoice == 'kamień') || (playerChoice == 'nożyczki' && computerChoice == 'papier')) {
         showWhoWon.innerHTML = 'Wygrana!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';     
-        wins = wins + 1 ;
-        winner.innerHTML = wins;
+        params.wins = params.wins + 1 ;
+        winner.innerHTML = params.wins;
     } else if ((playerChoice == 'kamień' && computerChoice == 'kamień') || (playerChoice == 'papier' && computerChoice == 'papier') || (playerChoice == 'nożyczki' && computerChoice == 'nożyczki')) {       
         showWhoWon.innerHTML = 'Remis!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
-        draws = draws + 1;
-        remixed.innerHTML = draws;
+        params.draws = params.draws + 1;
+        remixed.innerHTML = params.draws;
     } else {      
         showWhoWon.innerHTML = 'Porażka!' + '<br/>' + 'Twój wybór: ' + playerChoice + '<br/>' + 'Wybór komputera: ' + computerChoice + '<br>';       
-        loss = loss + 1;
-        losser.innerHTML = loss;
+        params.loss = params.loss + 1;
+        losser.innerHTML = params.loss;
     }
-        game = game + 1;
-        games.innerHTML = game;
-        endGame(totalRoundsForGame,  game);  
+    params.game = params.game + 1;
+        games.innerHTML = params.game;
+        endGame(totalRoundsForGame, params.game);  
 };
-
+    function whoWon() {
+        if (params.wins > params.loss) {
+            whowon.innerHTML = 'wygrałes'
+        } else if (params.wins < params.loss) {
+            whowon.innerHTML = 'przegrałeś'
+        } else  whowon.innerHTML = 'remis'
+    };
+   
 function choseAnItem(playerChoice) {
     var computerChoice = getRandomChoice(); 
     showResults.innerHTML = 'Gracz:' +  ' Komputer: ' + '</br>' + playerChoice + ' ' + computerChoice;
@@ -88,14 +102,16 @@ function choseAnItem(playerChoice) {
     showResult(playerChoice, computerChoice);  
 };
 
-function endGame(totalRoundsForGame,  game) {
+function endGame(totalRoundsForGame, game) {  
     if (totalRoundsForGame ===  game) {
         endOfGameMessage.innerHTML = 'Aby rozpoczać od nowa kliknij nowa gra';
         setButtonsDisplay('none');   
-        newGameButton.style.display = "block";    
+        newGameButton.style.display = "block";   
+        modalResults.style.display = "block";   
     } else {  
         endOfGameMessage.innerHTML =  ''; 
-    }
+    }  
+    createModal();
 };
 
 function setButtonsDisplay(display) {
@@ -106,7 +122,9 @@ function setButtonsDisplay(display) {
 
 function hideStartGameButtons(display) {
     beginButton.style.display = display;   
-    newGameButton.style.display = display;   
+    newGameButton.style.display = display; 
+    modalResults.style.display = display; 
+    
 };
 
 function reset() {   
@@ -117,13 +135,30 @@ function reset() {
 };
 
 function updateView() {
-    wins = 0;
-    loss = 0;
-    game = 0;
-    draws = 0;    
-    winner.innerHTML = wins;
-    remixed.innerHTML = draws;
-    losser.innerHTML = loss;
-    games.innerHTML = game;
+    params.wins = 0;
+    params.loss = 0;
+    params.game = 0;
+    params.draws = 0;    
+    winner.innerHTML = params.wins;
+    remixed.innerHTML = params.draws;
+    losser.innerHTML = params.loss;
+    games.innerHTML = params.game;
 };
 
+function whoWon() {
+    if (params.wins > params.loss) {
+        whowon.innerHTML = 'wygrałes'
+    } else if (params.wins < params.loss) {
+        whowon.innerHTML = 'przegrałeś'
+    } else  whowon.innerHTML = 'remis'
+};
+
+function createModal() {
+    modalResults.style.display = "block";
+    var modal = document.getElementById('modal-one');
+    var content = modal.querySelector('.content');
+    var p = document.createElement('p');
+    p.innerHTML = JSON.stringify(params);
+    content.appendChild(p);  
+    
+}

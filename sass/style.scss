@@ -1,7 +1,7 @@
 body {
     background-color: grey;
     padding: 10px;
-    color: azure;
+    color: black;
     font-size: 40px;
     text-align: center;
     position: relative;
@@ -12,8 +12,11 @@ body {
     top: 40%;
     right: 15%;
 }
+img {
+    cursor: pointer; 
+} 
 
-button {
+button { 
     display: none;
     padding: 11px 50px;
     max-width: 100%;
@@ -55,6 +58,57 @@ button {
 
 #newGameButton {
     position: absolute;
-    top: 105%;
-    left: 45%;
+    bottom: 100%;
+	right: 0px;
+	width: 703px;
+    height: 130px;
 }
+
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	
+	&.show {
+		display: block;
+	}
+} 
+
+.modal {
+	display: none;
+	background: #fff;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate3d(-50%, -50%, 0);
+
+	&.show {
+		display: block;
+	}
+	
+	.close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		padding: 5px;
+		color: #000;
+		text-decoration: none;
+	}
+	
+	header {
+		font-size: 20px;
+		line-height: 30px;
+		min-height: 30px;
+		font-weight: bold;
+		padding: 0 30px;
+	}
+
+	.content {
+		min-height: 30px;
+		padding: 5px 30px;
+	}
+}   
