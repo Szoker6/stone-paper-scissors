@@ -18,11 +18,7 @@ var modalOverlay = document.getElementById("modal-overlay");
 
 var totalRoundsForGame;
 var params = {
-    progress: [
-        
-           
-        
-    ],
+    progress: [],
     wins: 0,
     loss: 0,
     game: 0,
@@ -91,6 +87,7 @@ function showResult(playerChoice, computerChoice) {
     params.game = params.game + 1;
         games.innerHTML = params.game;
         checkIfEndGame(totalRoundsForGame, params.game);
+        params.progress.push(`${games.innerHTML} ${playerChoice} ${computerChoice} ${winnerResult.innerHTML} ${winnerResult.innerHTML}` + '<br>');
 };
 
 function choseAnItem(playerChoice) {
@@ -148,20 +145,20 @@ function displayWinnerInModal() {
     } else {
         winnerResult.innerHTML = 'remis';
     }
+    
 };
 
 function createModal() {
-    displayWinnerInModal();
     var modal = document.getElementById('modal-one');
     var content = modal.querySelector('.content');
     var resultList = modal.querySelector('.resultList');
     var p = document.createElement('p');
     var li = document.createElement('li');
-    li.innerHTML = `Number of rounds: ${params.game}`;
-   // p.innerHTML = 'W: ' + params.wins + ' vs ' + ' L: ' + params.loss;
-    p.innerHTML = `Win: ${params.wins} vs Loss: ${params.loss}`;
-    content.appendChild(p);
+    p.innerHTML = `${params.progress} `;
+    li.innerHTML = `RUNDA | WYBOR GRACZa | WYBOR KOMPUTERA | WYGRANY RUNDY | WYNIK GRY`;
     resultList.appendChild(li)
+    content.appendChild(p);
+
     showModal();
 }
 
@@ -174,3 +171,12 @@ function showModal() {
     modalOverlay.classList.add("show");
     modal.classList.add('show')
 };
+
+// function updateGameProgress() {
+//     params.progress.push({
+//         round: 1,
+//         showWhoWon: 'wygrana'
+       
+//     });
+// };
+// console.log(updateGameProgress())
