@@ -45,10 +45,15 @@ button {
 		background-color: #fff;
 	}
 }
+
 li {
-	list-style: none;
+	list-style-type: none;
 	font-size: 20px;
 }
+
+ul {
+	list-style-type: none;	
+	}
 
 #beginButton {
     display: block;
@@ -64,8 +69,8 @@ li {
 #newGameButton {
     position: absolute;
     bottom: 100%;
-	right: 0px;
-	width: 703px;
+    right: 180px;
+    width: 500px;
     height: 130px;
 }
 
@@ -117,7 +122,7 @@ li {
 		padding: 5px 0;
 		width: 900px;
 		p {
-			font-size: 18px;
+			font-size: 38px;
 		}
 	}
 }   

@@ -145,17 +145,18 @@ function displayWinnerInModal() {
     } else {
         winnerResult.innerHTML = 'remis';
     }
-    
+    params.progress.push(`${winnerResult.innerHTML}` + '<br>');
 };
 
 function createModal() {
+    displayWinnerInModal()
     var modal = document.getElementById('modal-one');
     var content = modal.querySelector('.content');
     var resultList = modal.querySelector('.resultList');
     var p = document.createElement('p');
     var li = document.createElement('li');
     p.innerHTML = `${params.progress} `;
-    li.innerHTML = `RUNDA | WYBOR GRACZa | WYBOR KOMPUTERA | WYGRANY RUNDY | WYNIK GRY`;
+    li.innerHTML = `RUNDA | WYBOR GRACZA | WYBOR KOMPUTERA | WYGRANA RUNDA | WYNIK GRY`;
     resultList.appendChild(li)
     content.appendChild(p);
 
@@ -172,11 +173,7 @@ function showModal() {
     modal.classList.add('show')
 };
 
-// function updateGameProgress() {
-//     params.progress.push({
-//         round: 1,
-//         showWhoWon: 'wygrana'
-       
-//     });
-// };
-// console.log(updateGameProgress())
+function updateGameProgress() {
+    params.progress.push(`${games.innerHTML} ${winnerResult.innerHTML}` + '<br>');
+};
+console.log(updateGameProgress())

@@ -44,8 +44,12 @@ button:hover, button:active {
 }
 
 li {
-  list-style: none;
+  list-style-type: none;
   font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
 }
 
 #beginButton {
@@ -62,8 +66,8 @@ li {
 #newGameButton {
   position: absolute;
   bottom: 100%;
-  right: 0px;
-  width: 703px;
+  right: 180px;
+  width: 500px;
   height: 130px;
 }
 
@@ -118,7 +122,7 @@ li {
 }
 
 .modal .content p {
-  font-size: 18px;
+  font-size: 38px;
 }
 
 /*# sourceMappingURL=style.css.map */
